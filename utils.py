@@ -1,7 +1,10 @@
 import requests
+import os
 
 def send_telegram(message, token=None, chat_id=None):
-    # 기본값 설정 (환경변수나 고정값 등으로 대체 가능)
+    # 환경변수에서 기본값 가져오기
+    token = token or os.getenv("TELEGRAM_TOKEN")
+    chat_id = chat_id or os.getenv("TELEGRAM_CHAT_ID")
 
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     data = {

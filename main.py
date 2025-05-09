@@ -1,12 +1,18 @@
 from flask import Flask, request
 from binance.client import Client
 import threading
+import os
 from trade_engine import TradeEngine
 from monitor import Monitor
 from utils import send_telegram
 
-# === 사용자 설정 ===
-INVEST_RATIO = 0.7  # 총 잔고의 70%를 투자 한도로 설정
+# === 사용자 설정 (환경 변수 사용) ===
+BINANCE_API_KEY = os.getenv("BINANCE_API_KEY")
+BINANCE_API_SECRET = os.getenv("BINANCE_API_SECRET")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+WEBHOOK_SECRET_KEY = os.getenv("WEBHOOK_SECRET_KEY", "mysecret")
+INVEST_RATIO = float(os.getenv("INVEST_RATIO", 0.7))  # 총 잔고의 70%를 투자 한도로 설정
 
 # === 초기화 ===
 app = Flask(__name__)
@@ -22,7 +28,7 @@ def webhook():
 
     symbol = data.get("symbol", "BTCUSDT")
     action = data.get("action", "buy").lower()
-    quantity = data.get("quantity")  # optional, if fixed quantity sent from TradingView
+    quantity = data.get("quantity")
 
     # 현재 총 USDT 잔고 가져오기
     balance = client.futures_account_balance()
