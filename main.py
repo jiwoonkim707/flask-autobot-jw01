@@ -6,11 +6,6 @@ from monitor import Monitor
 from utils import send_telegram
 
 # === 사용자 설정 ===
-BINANCE_API_KEY = "cxUKq5IxpkmxRsAYkV7gn3jMVrxMVsexN0dolzWEV3cFagb0U1QDODUMD1dMNzXu"
-BINANCE_API_SECRET = "uKajWGx5tqjnWmGk4RfZsqAejhvn3sMI6NI6BcR5msLzK8l649hwdnnBZlilj91V"
-TELEGRAM_TOKEN = "8000978154:AAHYqhD3E7AKQsxR1F1ss3m8kgssY79ZSEQ"
-TELEGRAM_CHAT_ID = "7752744045"
-WEBHOOK_SECRET_KEY = "mysecret"
 INVEST_RATIO = 0.7  # 총 잔고의 70%를 투자 한도로 설정
 
 # === 초기화 ===
